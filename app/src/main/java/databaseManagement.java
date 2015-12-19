@@ -1,3 +1,6 @@
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -6,6 +9,7 @@ import java.sql.Statement;
 
 public class databaseManagement {
 	
+	@TargetApi(Build.VERSION_CODES.KITKAT)
 	public static void username_authentication(String username, String password){
 		String usernameIdentification = "";
 		String passwordIdentification = "";
