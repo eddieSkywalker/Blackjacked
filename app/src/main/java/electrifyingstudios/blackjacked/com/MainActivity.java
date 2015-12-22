@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.EditText;
 
-
+//TEST
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.electrifyingstudios.blackjacked.MESSAGE";
 
