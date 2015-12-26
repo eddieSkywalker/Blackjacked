@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,17 +14,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity
+{
+    private static final String TAG = "MyAct";
+    private static final String AUTHENTICATE = "Authentication";
+    private static final String SERVER_CONTACT = "Contacting Server...";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Log.d(TAG, "Login Activity activated ");
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void username_authentication(View v, String username, String password){
-        System.out.println("SUCCESS.");
+    public void username_authentication(View v)
+    {
+        EditText editTextEmail = (EditText) findViewById(R.id.email);
+        EditText editTextPassword = (EditText) findViewById(R.id.password);
+        String username = editTextEmail.getText().toString();
+        String password = editTextPassword.getText().toString();
+        Log.d(AUTHENTICATE, "Auth method accessed | Login Activity activated ");
+
         String usernameIdentification = "";
         String passwordIdentification = "";
 
@@ -32,8 +46,9 @@ public class LoginActivity extends AppCompatActivity {
                         "jdbc:mysql://localhost:3306/blackjackdb", "rouser", "temp");
 
                 // Step 2: Allocate a "Statement" object in Connection
-                Statement stmt = conn.createStatement();
+                Statement stmt = conn.createStatement()
         ){
+            Log.d(SERVER_CONTACT, "Database access attempted | Auth method accessed | Login Activity activated ");
             //Step 3: Execute a SQL SELECT query, the query result
             // is returned in a "ResultSet" object.
             String strSelect = "SELECT username FROM blackjackdb.authentication WHERE username = '" + username + "'";
@@ -73,5 +88,11 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args)
+    {
+
+    }
+
 
 }
