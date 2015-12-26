@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity
                         "jdbc:mysql://localhost:3306/blackjackdb", "rouser", "temp");
 
                 // Step 2: Allocate a "Statement" object in Connection
-                Statement stmt = conn.createStatement();
+                Statement stmt = conn.createStatement()
         ){
             Log.d(SERVER_CONTACT, "Database access attempted | Auth method accessed | Login Activity activated ");
             //Step 3: Execute a SQL SELECT query, the query result
