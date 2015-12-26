@@ -4,8 +4,9 @@
     <string name="action_settings">Settings</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
-    <string name="title_activity_display_message">MyMessage</string>
-    <string name="title_activity_login">Login</string>
+    <string name="activity_display_message">MyMessage</string>
+    <string name="activity_login">Login</string>
+    <string name="buttonLogin">Login Activity</string>
 
     <!-- Strings related to login -->
     <string name="register">Register</string>

@@ -27,7 +27,7 @@
 
         <activity
             android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
+            android:label="@string/activity_display_message"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -37,8 +37,8 @@
 
         <activity
             android:name=".LoginActivity"
+            android:label="@string/activity_login"
             android:parentActivityName=".MainActivity"
-            android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

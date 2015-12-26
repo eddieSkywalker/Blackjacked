@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.EditText;
 
-//TE
+
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.electrifyingstudios.blackjacked.MESSAGE";
 
@@ -19,6 +20,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /** Called when the user clicks the onClick button */
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
+
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
@@ -61,5 +72,10 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+
     }
+
+    /** Called when the user attempts authentication */
+
+
 }
