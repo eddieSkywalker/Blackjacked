@@ -5,12 +5,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ActionMode;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,14 +25,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /** Called when the user clicks the onClick button */
+        /** Called when the user clicks the Login button */
         Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener()
-        {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
+
 
 //        TToolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -42,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
-
-    //TEST 4:31pm
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /** Called when the user attempts authentication */
+    public void login_activated(View view){
+        Intent openLoginActivity = new Intent(this, LoginActivity.class);
+        startActivity(openLoginActivity);
+    }
 
 
 }

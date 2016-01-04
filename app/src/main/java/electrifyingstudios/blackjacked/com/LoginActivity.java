@@ -1,98 +1,182 @@
 package electrifyingstudios.blackjacked.com;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
 
 public class LoginActivity extends AppCompatActivity
 {
-    private static final String TAG = "MyAct";
-    private static final String AUTHENTICATE = "Authentication";
-    private static final String SERVER_CONTACT = "Contacting Server...";
+    private static final String DEBUG_STARTUP = "Loading..";
+    private static final String DEBUG_REGISTER = "Registering..";
+    private static final String DEBUG_REGISTRATION_SUCCESS = "Register success..";
+    private static final String DEBUG_REGISTRATION_FAILED = "Register failure..";
+    private static final String DEBUG_LOGIN = "Logging in..";
+    private static final String DEBUG_LOGIN_SUCCESS = "Login success..";
+    private static final String DEBUG_LOGIN_FAILED = "Login failure..";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Log.d(TAG, "Login Activity activated ");
-    }
+        Log.d(DEBUG_STARTUP, "login activity activated ");
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public void username_authentication(View v)
-    {
-        EditText editTextEmail = (EditText) findViewById(R.id.email);
-        EditText editTextPassword = (EditText) findViewById(R.id.password);
-        String username = editTextEmail.getText().toString();
-        String password = editTextPassword.getText().toString();
-        Log.d(AUTHENTICATE, "Auth method accessed | Login Activity activated ");
+//        new AlertDialog.Builder(this)
+//                .setTitle("Delete entry")
+//                .setMessage("Are you sure you want to delete this entry?")
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // continue with delete
+//                    }
+//                })
+//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // do nothing
+//                    }
+//                })
+//                .setIcon(android.R.drawable.ic_dialog_alert)
+//                .show();
+//
+//        AlertDialog loginDialog = new AlertDialog.Builder(this).create();
+//        loginDialog.setTitle("Success");
+//        loginDialog.setMessage("Welcome to BlackJacked!");
+//        loginDialog.setButton(
+//                "No",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.cancel();
+//                    }
+//                });
+//        loginDialog.setIcon(android.R.drawable.ic_dialog_alert);
+//        loginDialog.show();
 
-        String usernameIdentification = "";
-        String passwordIdentification = "";
+//        FragmentManager fm = getFragmentManager();
+//        MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment ();
+//        dialogFragment.show(fm, "Sample Fragment");
 
-        // Step 1: Allocate a database "Connection" object
-        try(
-                Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/blackjackdb", "rouser", "temp");
 
-                // Step 2: Allocate a "Statement" object in Connection
-                Statement stmt = conn.createStatement()
-        ){
-            Log.d(SERVER_CONTACT, "Database access attempted | Auth method accessed | Login Activity activated ");
-            //Step 3: Execute a SQL SELECT query, the query result
-            // is returned in a "ResultSet" object.
-            String strSelect = "SELECT username FROM blackjackdb.authentication WHERE username = '" + username + "'";
-            System.out.println("The SQL query is: " + strSelect); // Echo For debugging
-            System.out.println();
-            ResultSet rset = stmt.executeQuery(strSelect);
 
-            // Step 4: Process the ResultSet by scrolling the cursor forward via rset.next()
-            // If username exists proceed with further verification
-            System.out.println("Scanning records...");
-            rset.next();
-            usernameIdentification = rset.getString("username");
 
-            if(username.equals(usernameIdentification)){
-                System.out.println("User found: " + username + " is located @" + usernameIdentification
-                        + " verifying password confirmation.");
+//        ParseObject testObject = new ParseObject("TestObject");
+//        testObject.put("foo", "bar");
+//        testObject.saveInBackground();
+//        testObject.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e != null) {
+//                    Log.e("PARSE.COM","FAILED" + e.getMessage());
+//                }
+//                else {
+//                    Log.e("PARSE.COM","SUCCESS");
+//                }
+//            }
+//        });
 
-                strSelect = "SELECT username, password FROM blackjackdb.authentication WHERE username = '" + username + "'";
-                System.out.println(strSelect);
-                rset = stmt.executeQuery(strSelect);
-                rset.next();
-                passwordIdentification = rset.getString("password");
-                if(password.equals(passwordIdentification)){
-                    System.out.println("System Login Successful.");
-                }
-                else{
-                    System.out.println("Password Incorrect.");
-                }
+        /** Called when the user clicks the Register button */
+        Button registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                /** Creates local GUI object [button or text view] and pulls data from according Activity XML file, and transfers to preferred variables if necessary */
+                EditText editTextEmail = (EditText) findViewById(R.id.email);
+                EditText editTextPassword = (EditText) findViewById(R.id.password);
+                String username = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+                final TextView duplicateUserWarning = (TextView) findViewById(R.id.duplicateUserWarning);
+
+                /** new user creation */
+                Log.d(DEBUG_REGISTER, "register method accessed | login activity activated ");
+                ParseUser newUser = new ParseUser();
+                newUser.setUsername(username);
+                newUser.setPassword(password);
+
+                newUser.signUpInBackground(new SignUpCallback()
+                {
+                    public void done(ParseException e)
+                    {
+                        if (e == null) {
+                            /** successful registration, alert user and close Login Activity. */
+                            Log.d(DEBUG_REGISTRATION_SUCCESS, "user registration successful | register method accessed | login activity activated ");
+                            duplicateUserWarning.setVisibility(View.INVISIBLE);
+                            duplicateUserWarning.setTextColor(0x00BB00);
+                            duplicateUserWarning.setText("Logged in!");
+                            FragmentManager fm = getFragmentManager();
+                            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment ();
+                            dialogFragment.show(fm, "Success.");
+
+                            kill_activity();
+                        }
+                        else {
+                            /** sign up failed, check parse exception to see why. */
+                            Log.d(DEBUG_REGISTRATION_FAILED, "user registration failure | register method accessed | login activity activated ");
+                            duplicateUserWarning.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             }
-            else{
-                System.out.println("User not found!");
+        });
+
+
+        /** Called when the user clicks the Login button */
+        Button loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                /** Creates local GUI object [button or text view] and pulls data from according Activity XML file, and transfers to preferred variables if necessary */
+                EditText editTextEmail = (EditText) findViewById(R.id.email);
+                EditText editTextPassword = (EditText) findViewById(R.id.password);
+                String username = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+                final TextView duplicateUserWarning = (TextView) findViewById(R.id.duplicateUserWarning);
+
+                /** authenticate user login */
+                Log.d(DEBUG_LOGIN, "login method accessed | login activity activated ");
+                ParseUser.logInInBackground(username, password, new LogInCallback() {
+                    public void done(ParseUser user, ParseException e) {
+                        if (user != null) {
+                            /** successful login, alert user and close Login Activity. */
+                            Log.d(DEBUG_LOGIN_SUCCESS, "user login successful | register method accessed | login activity activated ");
+                            duplicateUserWarning.setVisibility(View.INVISIBLE);
+                            duplicateUserWarning.setTextColor(0x00BB00);
+                            duplicateUserWarning.setText("Logged in!");
+                            FragmentManager fm = getFragmentManager();
+                            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
+                            dialogFragment.show(fm, "Success.");
+
+                            kill_activity();
+                        } else {
+                            /** sign up failed, check parse exception to see why. */
+                            Log.d(DEBUG_LOGIN_FAILED, "user login failure | register method accessed | login activity activated ");
+                            duplicateUserWarning.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             }
+        });
 
+    } // Activity OnCreate End Bracket
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args)
+    void kill_activity()
     {
-
+        finish();
     }
 
+}// Activity End Bracket
 
-}

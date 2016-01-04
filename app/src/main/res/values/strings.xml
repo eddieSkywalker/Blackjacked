@@ -13,4 +13,8 @@
     <string name="login">Log In</string>
     <string name="emailTextField">E-Mail</string>
     <string name="passwordTextField">Password</string>
+    <string name="duplicateUserWarning">"*Username/Password already in use. Please try again."</string>
+    <string name="alertDialogOkButton">Ok</string>
+    <string name="alertDialogMessage">Logged in!</string>
+
 </resources>
