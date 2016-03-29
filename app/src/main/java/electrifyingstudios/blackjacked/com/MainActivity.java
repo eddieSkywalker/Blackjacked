@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.View;
 import android.view.Menu;
@@ -18,25 +19,25 @@ import com.parse.ParseObject;
 
 
 public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "com.electrifyingstudios.blackjacked.MESSAGE";
+    public final static String DEBUG_NEWGAME = "DEBUG_TAG NewGame";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /** Called when the user clicks the Login button */
-        Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            }
-        });
+//        /** Called when the user clicks the Login button */
+//        Button loginButton = (Button) findViewById(R.id.loginButton);
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//            }
+//        });
 
 
 //        TToolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-
+//
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -69,20 +70,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /** Called when the user clicks the Send button */
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.edit_message);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-
+    /** Called when the user clicks Log In to open new activity */
+    public void login_activated(View view){
+        Intent openActivity = new Intent(this, LoginActivity.class);
+        startActivity(openActivity);
     }
 
-    /** Called when the user attempts authentication */
-    public void login_activated(View view){
-        Intent openLoginActivity = new Intent(this, LoginActivity.class);
-        startActivity(openLoginActivity);
+    /** Called when the user clicks New Game to open new activity */
+    public void newGame_activated(View view){
+        Log.d(DEBUG_NEWGAME, "new game activity activated ");
+        Intent openActivity = new Intent(this, NewGameActivity.class);
+        startActivity(openActivity);
     }
 
 

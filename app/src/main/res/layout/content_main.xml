@@ -16,11 +16,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.33"></FrameLayout>
+        android:layout_weight="2"></FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <LinearLayout
             android:orientation="vertical"
@@ -36,13 +37,13 @@
                 android:text="New Game"
                 android:id="@+id/mainMenuNewGame"
                 android:textSize="36dp"
-                android:enabled="false" />
+                android:onClick="newGame_activated" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Log In"
+                android:text="@string/mainMenu_login"
                 android:id="@+id/mainMenuSignIn"
                 android:textSize="36dp"
                 android:onClick="login_activated" />
@@ -70,27 +71,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/buttonLogin"
-            android:id="@+id/loginButton"
-            />
-
-        <EditText android:id="@+id/edit_message"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/edit_message" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_send"
-            android:onClick="sendMessage"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
     </LinearLayout>
 

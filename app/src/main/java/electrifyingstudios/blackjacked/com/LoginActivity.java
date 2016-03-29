@@ -117,8 +117,9 @@ public class LoginActivity extends AppCompatActivity
                             duplicateUserWarning.setTextColor(0x00BB00);
                             duplicateUserWarning.setText("Logged in!");
                             FragmentManager fm = getFragmentManager();
-                            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment ();
-                            dialogFragment.show(fm, "Success.");
+//                            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
+//                            dialogFragment.show(fm, "Success.");
+                            newInstance(R.id.alertDialogTitle).show(fm, "test");
 
                             kill_activity();
                         }
@@ -153,14 +154,13 @@ public class LoginActivity extends AppCompatActivity
                         if (user != null) {
                             /** successful login, alert user and close Login Activity. */
                             Log.d(DEBUG_LOGIN_SUCCESS, "user login successful | register method accessed | login activity activated ");
-                            duplicateUserWarning.setVisibility(View.INVISIBLE);
+//                            duplicateUserWarning.setVisibility(View.INVISIBLE);
                             duplicateUserWarning.setTextColor(0x00BB00);
                             duplicateUserWarning.setText("Logged in!");
                             FragmentManager fm = getFragmentManager();
-                            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
-                            dialogFragment.show(fm, "Success.");
+                            newInstance(R.id.alertDialogTitle).show(fm, "test");
 
-                            kill_activity();
+
                         } else {
                             /** sign up failed, check parse exception to see why. */
                             Log.d(DEBUG_LOGIN_FAILED, "user login failure | register method accessed | login activity activated ");
@@ -170,12 +170,20 @@ public class LoginActivity extends AppCompatActivity
                 });
             }
         });
-
     } // Activity OnCreate End Bracket
 
     void kill_activity()
     {
         finish();
+    }
+
+    public static MyAlertDialogFragment newInstance(int title)
+    {
+        MyAlertDialogFragment frag = new MyAlertDialogFragment();
+        Bundle args = new Bundle();
+        args.putInt("title", title);
+        frag.setArguments(args);
+        return frag;
     }
 
 }// Activity End Bracket

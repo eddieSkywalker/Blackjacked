@@ -15,7 +15,7 @@
         android:id="@+id/alertDialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/alertDialogMessage"
+        android:text="Logged in!"
         android:textSize="20dp" />
 
     <Button

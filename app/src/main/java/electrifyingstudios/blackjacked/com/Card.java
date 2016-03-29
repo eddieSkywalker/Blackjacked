@@ -1,5 +1,6 @@
+package electrifyingstudios.blackjacked.com;
 
-public class Card 
+public class Card
 {
 	private int rank;
 	private int suit;
@@ -17,7 +18,7 @@ public class Card
 		return rank;
 	}
 	//Create SUITS
-	private String getSuit() {
+	public String getSuit() {
 		if(suit == 1){
 			suitStr = "Hearts";
 		}

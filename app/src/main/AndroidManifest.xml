@@ -10,9 +10,9 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <!-- <uses-sdk -->
-    <!-- android:minSdkVersion="15" -->
-    <!-- android:targetSdkVersion="23" /> -->
+     <!--<uses-sdk-->
+     <!--android:minSdkVersion="15"-->
+     <!--android:targetSdkVersion="23" />-->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -36,15 +36,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".DisplayMessageActivity"
-            android:label="@string/activity_display_message"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="electrifyingstudios.blackjacked.com.MainActivity" />
         </activity>
         <activity
             android:name=".LoginActivity"

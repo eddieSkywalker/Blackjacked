@@ -1,3 +1,5 @@
+package electrifyingstudios.blackjacked.com;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,10 +16,11 @@ public class Dealer {
 	int amount = 0;
 	int aceValue = 0;
  
-	public Dealer(String path) 
-	{
-		deck = new Deck(path);
-	}
+//	public Dealer(String path)
+//	{
+//		deck = new Deck(path);
+//	}
+
 	public void deal()
 	{
 		//DEALS CARDS TO DEALER AND PLAYER AND ADDS THEM TO ACCORDING ARRAY LISTS
@@ -48,7 +51,7 @@ public class Dealer {
 		bet(amount);
 		deal();
 		System.out.println("Your hand: " + playersCard1.toString() + ", " + playersCard2.toString());
-		System.out.println("Dealer's hand: " + dealersCard1.toString() + ", Hidden");
+		System.out.println("electrifyingstudios.blackjacked.com.Dealer's hand: " + dealersCard1.toString() + ", Hidden");
 		System.out.println(pHandRank() + " <-- player  dealer --> " + dHandRank());
 		quickWin();			
 		nextMove();
@@ -161,7 +164,7 @@ public class Dealer {
 	}
 	public void stay(int answer) {
 		System.out.println("Your input was: " + answer + "\nYou selected Stay\n");
-		System.out.println("Dealer's hand shows: " + dealersCard1.toString() + ", " + dealersCard2.toString());
+		System.out.println("electrifyingstudios.blackjacked.com.Dealer's hand shows: " + dealersCard1.toString() + ", " + dealersCard2.toString());
 		System.out.println("player: " + pHandRank() + " dealer: " + dHandRank());
 		System.out.println("");
 
@@ -169,7 +172,7 @@ public class Dealer {
 		{
 			if(deck.deckOfCards.size() == 0)
 			{
-				System.out.println("Out of cards. Dealer Stays.");
+				System.out.println("Out of cards. electrifyingstudios.blackjacked.com.Dealer Stays.");
 				for(int i = 0; i < playersHand.size(); i++)
 				{
 					System.out.print(playersHand.get(i).toString() + ", ");
@@ -185,9 +188,9 @@ public class Dealer {
 			}
 			else
 			{
-			System.out.println("Dealer Hits!");
+			System.out.println("electrifyingstudios.blackjacked.com.Dealer Hits!");
 			dAddToHand(hit());
-			System.out.print("Dealer's new hand: ");
+			System.out.print("electrifyingstudios.blackjacked.com.Dealer's new hand: ");
 			for(int i = 0; i < dealersHand.size(); i++)
 			{
 				System.out.print(dealersHand.get(i).toString() + ", ");
@@ -206,7 +209,7 @@ public class Dealer {
 		
 		if(dHandRank() == 21)
 		{
-			System.out.println("Dealer has Blackjack! You LOSE!");
+			System.out.println("electrifyingstudios.blackjacked.com.Dealer has Blackjack! You LOSE!");
 			losses++;
 			score();
 			playAgain();
@@ -214,7 +217,7 @@ public class Dealer {
 		
 		if(dHandRank() > 21)
 		{
-			System.out.println("Dealer has bust. You WIN!");
+			System.out.println("electrifyingstudios.blackjacked.com.Dealer has bust. You WIN!");
 			wins++;
 			System.out.println("You've won $" + amount + " this round with a new total of $" + (cashMoney += amount));
 			score();
@@ -237,7 +240,7 @@ public class Dealer {
 		//RANK METHODS RETURN INTEGERS TO COMPARE WINNER AND SET SCORE ACCORDINGLY
 		if(dHandRank() > pHandRank() && dHandRank() <= 21)
 		{
-			System.out.println("Dealer WINS.");
+			System.out.println("electrifyingstudios.blackjacked.com.Dealer WINS.");
 			losses++;
 			System.out.println("You've lost $" + amount + " this round with a remaining total of $" + cashMoney);
 			score();
@@ -254,7 +257,7 @@ public class Dealer {
 	}
 	private void score() 
 	{
-		System.out.println("Score: Dealer: " + losses + " You: " + wins + "\n");
+		System.out.println("Score: electrifyingstudios.blackjacked.com.Dealer: " + losses + " You: " + wins + "\n");
 	}
 	private void playAgain() 
 	{
@@ -270,7 +273,7 @@ public class Dealer {
 				score();
 				clearHands();
 				//RECALLS IN THE FILE TO RECREATE THE DECK OF CARDS
-				deck = new Deck("/Users/MacbookPro/ASU/Java Projects/Blackjack/Blackjack/bj.txt");
+//				deck = new Deck("/Users/MacbookPro/ASU/Java Projects/Blackjack/Blackjack/bj.txt");
 				play();
 			}
 			else if(replay.equalsIgnoreCase("n"))
@@ -433,10 +436,10 @@ public class Dealer {
 	}
 
 
-	public static void main(String[] args)
-	{
-		Dealer d = new Dealer("/Users/MacbookPro/AndroidStudioProjects/Blackjacked/app/src/Deck Files/bj");
-		d.play();
-	}
+//	public static void main(String[] args)
+//	{
+//		Dealer d = new Dealer("/Users/MacbookPro/AndroidStudioProjects/Blackjacked/app/src/electrifyingstudios.blackjacked.com.Deck Files/bj");
+//		d.play();
+//	}
 
 }
